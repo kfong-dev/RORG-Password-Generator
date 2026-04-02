@@ -8,6 +8,7 @@ free public development key licensed for testing only — it is intentionally
 included in source and is not a secret. Production deployments should use a 
 separately licensed key obtained from https://api.random.org/pricing
 
-Original project and credit goes to 
-John Nevzer Avrung (https://sourceforge.net/u/john-nevzer/profile/)
-https://sourceforge.net/projects/pasword-generator-rorg/
+Original project and credit goes to Jan Pisa: jan_pisa@email.cz
+Retrieved from SourceForge:
+Published by: John Nevzer Avrung (https://sourceforge.net/u/john-nevzer/profile/)
+URL: https://sourceforge.net/projects/pasword-generator-rorg/
