@@ -1,0 +1,15 @@
+Version 2.0
+
+The Rorg application enables users to generate strong passwords using 
+the random.org service or locally without a network connection. 
+It supports a very wide range, specifically up to UTF-16, ensuring robust 
+and secure password creation tailored to your needs.
+
+Creator: John Nevzer Avrung
+
+
+Documentation is in folder DOC in .exe file directory. Files for documentation is marked DOC-...
+List of files:
+DOC-About_app
+DOC-Paths_and_files
+DOC-What_is_API

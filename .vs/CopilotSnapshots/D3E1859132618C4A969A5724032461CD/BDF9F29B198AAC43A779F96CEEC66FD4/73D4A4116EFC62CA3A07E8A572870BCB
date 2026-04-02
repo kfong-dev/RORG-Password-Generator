@@ -1,0 +1,90 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using static System.Net.WebRequestMethods;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
+namespace Pasword_generator
+{
+    public partial class Form2 : Form
+    {
+        public string message { get; set; }
+
+        public Form2()
+        {
+            InitializeComponent();
+        }
+
+        SaveSettings settings = new SaveSettings();
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            message += settings.LoadData(false) + "\n";
+            textBoxApiKey.Text = settings.key;
+            radioButtonDelayDefault.Checked = !settings.requestMode;
+            radioButtonDelayCustome.Checked = settings.requestMode;
+            numericUpDownDelay.Value = settings.requestDelay;
+            numericUpDownresult.Value = settings.lenght;
+
+            switch (settings.mode)
+            {
+                case 0: radTypeNumbers.Checked = true; break;
+                case 1: radTypeCharNormal.Checked = true; break;
+                case 2: radTypeCharSpecial.Checked = true; break;
+                case 3: radTypeCharEnabled.Checked = true; break;
+                case 4: radTypeCharAll.Checked = true; break;
+            }
+
+            radTypeGenLocal.Checked = !settings.usedApi;
+            radTypeGenOnline.Checked = settings.usedApi;
+            checkBoxClear.Checked = settings.clearPreviusResult;
+            checkBoxClibboard.Checked = settings.copyToClibboard;
+
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            settings.key = textBoxApiKey.Text;
+            settings.requestMode = radioButtonDelayCustome.Checked;
+            settings.requestDelay = (int)numericUpDownDelay.Value;
+            settings.lenght = (int)numericUpDownresult.Value;
+
+            if (radTypeNumbers.Checked) settings.mode = 0;
+            else if (radTypeCharNormal.Checked) settings.mode = 1;
+            else if (radTypeCharSpecial.Checked) settings.mode = 2;
+            else if (radTypeCharEnabled.Checked) settings.mode = 3;
+            else if (radTypeCharAll.Checked) settings.mode = 4;
+
+            settings.usedApi = radTypeGenOnline.Checked;
+            settings.clearPreviusResult = checkBoxClear.Checked;
+            settings.copyToClibboard = checkBoxClibboard.Checked;
+
+            message += settings.WriteData() + "\n";
+            this.Close();
+        }
+
+        private void buttonDiscard_Click(object sender, EventArgs e)
+        {
+            message += "Changes not save, operation canceled.";
+            this.Close();
+        }
+
+        private void buttonApiHelp_Click(object sender, EventArgs e)
+        {
+            string info = System.IO.File.ReadAllText("DOC\\DOC-What_is_API.txt", Encoding.UTF8);
+            MessageBox.Show(info);
+        }
+
+        private void buttonAbout_Click(object sender, EventArgs e)
+        {
+            string info = System.IO.File.ReadAllText("DOC\\DOC-About_app.txt", Encoding.UTF8);
+            MessageBox.Show(info);
+        }
+    }
+}

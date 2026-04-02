@@ -1,0 +1,507 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Pasword_generator
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        Random ran = new Random();
+        private static readonly HttpClient client = new HttpClient();
+
+        const string defaultPath = "C:\\";
+        const int stringMaximum = 32;
+        const int intMaximum = 128;
+        const int utf16Limit = 1114111;
+
+        string NUchars, Nchars, Schars, Echars;
+        string errors = "OK";
+        int maxlenght = 16;
+        int mode = 3;//everithink
+        bool usedApi = true;//online
+        int waitTime = 100;//im ms
+        string apikey;
+        SaveSettings settings = new SaveSettings();
+
+        // Designer checkbox for mixing with CSPRNG (added to UI) - declared in Designer file
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                // Reset RNG provider on each load by reseeding the PRNG from CSPRNG
+                try
+                {
+                    byte[] seedBytes = new byte[4];
+                    using (var rng = RandomNumberGenerator.Create())
+                    {
+                        rng.GetBytes(seedBytes);
+                    }
+                    int seed = BitConverter.ToInt32(seedBytes, 0);
+                    ran = new Random(seed);
+                }
+                catch { ran = new Random(); }
+                NUchars = File.ReadAllText("CharsMap\\number.ini", Encoding.UTF8);
+                Nchars = File.ReadAllText("CharsMap\\normal.ini", Encoding.UTF8);
+                Schars = File.ReadAllText("CharsMap\\special.ini", Encoding.UTF8);
+                Echars = File.ReadAllText("CharsMap\\enabled.ini", Encoding.UTF8);
+
+                labelStatus.Text = settings.LoadData(false);
+                waitTime = (settings.requestMode) ? settings.requestDelay : 100;
+                apikey = settings.key;
+
+                numericUpDownLenght.Value = settings.lenght;
+
+                switch (settings.mode)
+                {
+                    case 0: radTypeNumbers.Checked = true; break;
+                    case 1: radTypeCharNormal.Checked = true; break;
+                    case 2: radTypeCharSpecial.Checked = true; break;
+                    case 3: radTypeCharEnabled.Checked = true; break;
+                    case 4: radTypeCharAll.Checked = true; break;
+                }
+
+                // default to hybrid
+                radGenHybrid.Checked = true;
+                checkBoxClear.Checked = settings.clearPreviusResult;
+                checkBoxCopy.Checked = settings.copyToClibboard;
+            }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+        }
+
+        private async void buttonGenerate_Click(object sender, EventArgs e)
+        {
+            string tmp = "internal error";
+            labelStatus.Text = "Wait a MINUTE, Please.";
+            maxlenght = (int)numericUpDownLenght.Value;
+
+            if (radTypeNumbers.Checked) mode = 0;
+            else if (radTypeCharNormal.Checked) mode = 1;
+            else if (radTypeCharSpecial.Checked) mode = 2;
+            else if (radTypeCharEnabled.Checked) mode = 3;
+            else if (radTypeCharAll.Checked) mode = 4;
+
+            if (radGenCSPRNG.Checked)
+            {
+                tmp = PureCSPRNGGen();
+            }
+            else if (radGenAtmospheric.Checked)
+            {
+                tmp = await rorgGen();
+            }
+            else // hybrid
+            {
+                tmp = await rorgGen();
+            }
+            if (checkBoxCopy.Checked)//copy clip
+                Clipboard.SetText(tmp);
+            if (checkBoxClear.Checked)//clear result
+                textBoxResult.Clear();
+            errors = (tmp.Split("\n")[0] == "0") ? tmp.Split("\n")[2] : "OK";
+            textBoxResult.Text += tmp.Replace("0\n", "");
+            labelStatus.Text = errors + "\nChars generated: " + tmp.Length.ToString();
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            List<string> keychars = new List<string>();
+            SaveFileDialog saveFileDialog = new SaveFileDialog(); saveFileDialog.Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+                using (StreamWriter sw = new StreamWriter(defaultPath + "edited.txt", false, Encoding.Unicode))
+                {
+                    string st = "";
+                    foreach (string a in keychars)
+                        st += a.ReplaceLineEndings().Replace("\r\n", "");
+                    sw.Write(st, false);
+                    sw.Close();
+                    textBoxResult.Text = st;
+                }
+                labelStatus.Text = "File with string saved succesfuly.";
+            }
+        }
+
+        private string localGen()//normal or special string
+        {
+            string result = "";
+            for (int i = 0; i < maxlenght; i++)
+            {
+                switch (mode)
+                {
+                    case 0:
+                        result += ran.Next(0, 10).ToString();
+                        break;
+                    case 1:
+                        result += Nchars[ran.Next(Nchars.Length)];
+                        break;
+                    case 2:
+                        result += (Nchars + NUchars + Schars)[ran.Next((string.Join(Nchars, NUchars, Schars)).Length)];
+                        break;
+                    case 3:
+                        result += Echars[ran.Next(Echars.Length)];
+                        break;
+                    case 4:
+                        result += (char)ran.Next(0, utf16Limit);
+                        break;
+                }
+            }
+            return result;
+        }
+
+        private string PureCSPRNGGen()
+        {
+            int len = maxlenght;
+            if (mode == 4)
+            {
+                // generate BMP chars from CSPRNG
+                byte[] buf = new byte[len * 2];
+                using (var rng = RandomNumberGenerator.Create()) rng.GetBytes(buf);
+                var sb = new StringBuilder(len);
+                for (int i = 0, j = 0; i < len; i++, j += 2)
+                {
+                    ushort v = (ushort)(buf[j] | (buf[j + 1] << 8));
+                    v = (ushort)(v % 0xD800);
+                    sb.Append((char)v);
+                }
+                return sb.ToString();
+            }
+
+            string charset = mode switch
+            {
+                0 => NUchars,
+                1 => Nchars + NUchars,
+                2 => Nchars + NUchars + Schars,
+                3 => Echars,
+                _ => Echars
+            };
+
+            if (string.IsNullOrEmpty(charset)) return string.Empty;
+
+            // Use rejection sampling to avoid bias
+            var outSb = new StringBuilder(len);
+            int neededBytes = len * 4;
+            byte[] derived = new byte[neededBytes];
+            using (var rng = RandomNumberGenerator.Create()) rng.GetBytes(derived);
+            int off = 0;
+            uint uintMax = uint.MaxValue;
+            uint L = (uint)charset.Length;
+            uint threshold = (L > 1) ? uintMax - (uintMax % L) : uintMax;
+
+            for (int i = 0; i < len; i++)
+            {
+                uint val = 0;
+                bool accepted = false;
+                while (!accepted)
+                {
+                    if (off + 4 > derived.Length)
+                    {
+                        derived = HKDF_SHA256(derived, null, Encoding.UTF8.GetBytes("pure-csprng"), neededBytes);
+                        off = 0;
+                    }
+                    val = (uint)(derived[off++] | (derived[off++] << 8) | (derived[off++] << 16) | (derived[off++] << 24));
+                    if (L == 1 || val < threshold) accepted = true;
+                }
+                int idx = (int)(L == 1 ? 0 : (val % L));
+                outSb.Append(charset[idx]);
+            }
+
+            return outSb.ToString();
+        }
+        private async Task<string> rorgGen() //normal or special string 
+        {
+            string result = "";
+            if (mode == 4)
+            {
+                int full = maxlenght / intMaximum;
+                int rem = maxlenght % intMaximum;
+
+                for (int i = 0; i < full; i++)
+                    result += await generatorNumber(intMaximum, apikey, waitTime);
+
+                if (rem > 0)
+                    result += await generatorNumber(rem, apikey, waitTime);
+            }
+            else
+            {
+                int full = maxlenght / stringMaximum;
+                int rem = maxlenght % stringMaximum;
+
+                for (int i = 0; i < full; i++)
+                    result += await generatorString(stringMaximum, mode, apikey, waitTime, NUchars, Nchars, Schars, Echars);
+
+                if (rem > 0)
+                    result += await generatorString(rem, mode, apikey, waitTime, NUchars, Nchars, Schars, Echars);
+            }
+            // Mix with CSPRNG via HKDF-SHA256 if user requested mixing
+            try
+            {
+                if (checkBoxMixCSPRNG != null && checkBoxMixCSPRNG.Checked && !result.StartsWith("0\n"))
+                {
+                    result = MixWithHKDF(result, mode);
+                }
+            }
+            catch { }
+
+            return result;
+        }
+
+        private string MixWithHKDF(string rorgResult, int mode)
+        {
+            if (string.IsNullOrEmpty(rorgResult)) return rorgResult;
+
+            int len = rorgResult.Length;
+
+            // Collect local CSPRNG entropy
+            byte[] local = new byte[64];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(local);
+            }
+
+            // Use remote bytes as UTF8 of Random.org output (supplemental entropy)
+            byte[] remote = Encoding.UTF8.GetBytes(rorgResult);
+
+            // Domain separation
+            byte[] ikm = new byte[local.Length + 1 + remote.Length + 1];
+            Buffer.BlockCopy(local, 0, ikm, 0, local.Length);
+            ikm[local.Length] = 0x01;
+            Buffer.BlockCopy(remote, 0, ikm, local.Length + 1, remote.Length);
+            ikm[ikm.Length - 1] = 0x02;
+
+            // info for HKDF
+            byte[] info = Encoding.UTF8.GetBytes("hybrid-hkdf-v1");
+
+            // We'll need bytes for rejection sampling; start with a generous amount
+            int neededBytes = Math.Max(4 * len * 4, len * 4);
+            byte[] derived = HKDF_SHA256(ikm, null, info, neededBytes);
+
+            var sb = new StringBuilder(len);
+
+            if (mode == 4)
+            {
+                // Use 2 bytes per char
+                int off = 0;
+                for (int i = 0; i < len; i++)
+                {
+                    if (off + 2 > derived.Length)
+                    {
+                        // derive more bytes with different info
+                        info = info.Concat(new byte[] { (byte)i }).ToArray();
+                        derived = derived.Concat(HKDF_SHA256(ikm, null, info, neededBytes)).ToArray();
+                    }
+                    ushort v = (ushort)(derived[off++] | (ushort)(derived[off++] << 8));
+                    // map into non-surrogate BMP range
+                    v = (ushort)(v % 0xD800);
+                    sb.Append((char)v);
+                }
+            }
+            else
+            {
+                string charset = mode switch
+                {
+                    0 => NUchars,
+                    1 => Nchars + NUchars,
+                    2 => Nchars + NUchars + Schars,
+                    3 => Echars,
+                    _ => Echars
+                };
+
+                if (string.IsNullOrEmpty(charset)) return rorgResult;
+
+                int off = 0;
+                uint uintMax = uint.MaxValue;
+                uint threshold = 0;
+                uint L = (uint)charset.Length;
+                if (L > 1) threshold = uintMax - (uintMax % L);
+
+                for (int i = 0; i < len; i++)
+                {
+                    uint val = 0;
+                    bool accepted = false;
+                    while (!accepted)
+                    {
+                        if (off + 4 > derived.Length)
+                        {
+                            // derive more
+                            info = info.Concat(new byte[] { (byte)i }).ToArray();
+                            derived = derived.Concat(HKDF_SHA256(ikm, null, info, neededBytes)).ToArray();
+                        }
+                        val = (uint)(derived[off++] | (derived[off++] << 8) | (derived[off++] << 16) | (derived[off++] << 24));
+                        if (L == 1)
+                        {
+                            accepted = true;
+                        }
+                        else if (val < threshold)
+                        {
+                            accepted = true;
+                        }
+                        else
+                        {
+                            // rejected due to modulo bias avoidance, continue
+                            accepted = false;
+                        }
+                    }
+                    int idx = (int)(L == 1 ? 0 : (val % L));
+                    sb.Append(charset[idx]);
+                }
+            }
+
+            return sb.ToString();
+        }
+
+        private static byte[] HKDF_SHA256(byte[] ikm, byte[] salt, byte[] info, int length)
+        {
+            // HKDF-Extract
+            byte[] prk;
+            using (var hmac = new HMACSHA256(salt ?? new byte[32]))
+            {
+                prk = hmac.ComputeHash(ikm);
+            }
+
+            // HKDF-Expand
+            List<byte> okm = new List<byte>(length);
+            byte[] previous = new byte[0];
+            int iterations = (int)Math.Ceiling((double)length / 32);
+            for (int i = 1; i <= iterations; i++)
+            {
+                using (var hmac = new HMACSHA256(prk))
+                {
+                    // T(i) = HMAC-PRK(T(i-1) | info | i)
+                    byte[] input = new byte[previous.Length + (info?.Length ?? 0) + 1];
+                    Buffer.BlockCopy(previous, 0, input, 0, previous.Length);
+                    if (info != null) Buffer.BlockCopy(info, 0, input, previous.Length, info.Length);
+                    input[input.Length - 1] = (byte)i;
+                    previous = hmac.ComputeHash(input);
+                    okm.AddRange(previous);
+                }
+            }
+
+            return okm.Take(length).ToArray();
+        }
+
+        static async Task<string> generatorString(int len, int specs, string apik, int wait, string NUch, string Nch, string Sch, string Ech)
+        {
+            string Fchar = "*";
+
+            try
+            {
+                switch (specs)
+                {
+                    case 0: Fchar = NUch; break;
+                    case 1: Fchar = Nch + NUch; break;
+                    case 2: Fchar = Nch + NUch + Sch; break;
+                    case 3: Fchar = Ech; break;
+                }
+
+                var request = new
+                {
+                    jsonrpc = "2.0",
+                    method = "generateStrings",
+                    @params = new
+                    {
+                        apiKey = apik,
+                        n = 1,
+                        length = len,
+                        characters = Fchar,
+                        replacement = true
+                    },
+                    id = 1
+                };
+
+                var json = System.Text.Json.JsonSerializer.Serialize(request);
+                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+
+                var response = await client.PostAsync("https://api.random.org/json-rpc/4/invoke", content);
+                response.EnsureSuccessStatusCode();
+
+                var responseString = await response.Content.ReadAsStringAsync();
+                var doc = System.Text.Json.JsonDocument.Parse(responseString);
+                var root = doc.RootElement;
+
+                if (root.TryGetProperty("error", out var errorElem))
+                {
+                    string msg = errorElem.TryGetProperty("message", out var m)
+                        ? m.GetString() ?? "Unknown error"
+                        : "Unknown error";
+                    return $"Generation Error! {msg}";
+                }
+
+                string randomString = root
+                    .GetProperty("result")
+                    .GetProperty("random")
+                    .GetProperty("data")[0]
+                    .GetString() ?? "";
+
+                await Task.Delay(wait);
+                return randomString;
+            }
+            catch (Exception ex)
+            {
+                return $"0\nGeneration Error!\n{ex.Message}";
+            }
+        }
+
+        static async Task<string> generatorNumber(int len, string apik, int wait)//int numbers
+        {
+            try
+            {
+                string url = "https://api.random.org/json-rpc/4/invoke";
+                using HttpClient client = new HttpClient();
+                var request = new
+                {
+                    jsonrpc = "2.0",
+                    method = "generateIntegerSequences",
+                    @params = new
+                    {
+                        apiKey = apik,  // Zde vlo�te sv�j vlastn� API kl��
+                        n = 1,  //pocet sekvenci
+                        length = len,// Po�et ��sel, kter� chcete vygenerovat
+                        min = 0,  // Minim�ln� hodnota
+                        max = utf16Limit,  // Maxim�ln� hodnota
+                        replacement = true  // Jestli se ��sla mohou opakovat
+                    },
+                    id = 1
+                };
+                var json = System.Text.Json.JsonSerializer.Serialize(request);
+                var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, content);
+                response.EnsureSuccessStatusCode();
+                var responseString = await response.Content.ReadAsStringAsync();
+                var doc = System.Text.Json.JsonDocument.Parse(responseString);
+                var data = doc.RootElement.GetProperty("result").GetProperty("random").GetProperty("data");
+                string result = string.Concat(data.EnumerateArray().First().EnumerateArray().Select(x => (char)x.GetInt32()));
+
+                await Task.Delay(wait);
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                return $"0\nGeneration Error!\n{ex.Message}";
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e) { Clipboard.SetText(textBoxResult.Text); }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            Enabled = false;
+            Form2 setForm = new Form2();
+            setForm.ShowDialog();
+            Enabled = true;
+            labelStatus.Text = setForm.message;
+        }
+    }
+}

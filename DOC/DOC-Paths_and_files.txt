@@ -1,0 +1,18 @@
+Default API key is stored in file defaultApiKey.ini  
+(same directory as Password_generator.exe).
+
+User-defined key is saved to:  
+C:\ProgramData\Rorg\config.ini
+
+Custom config path can be changed in file  
+defaultSettingPath.ini (next to .exe).
+
+Fallback/default application settings (used on first run or when user config is missing):  
+defaultSettings.ini (next to .exe).
+
+Important random.org limits (most non-enterprise accounts):
+- 10,000 requests per day
+- peak 10 requests per second
+
+Shared default key is only for testing and initial launch.  
+For production / multiple users → always use your own key.

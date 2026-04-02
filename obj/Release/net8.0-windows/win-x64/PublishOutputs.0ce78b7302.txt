@@ -1,0 +1,16 @@
+C:\Intel\RORG Password Generator\publish\win-x64\Pasword_generator.exe
+C:\Intel\RORG Password Generator\publish\win-x64\CharsMap\enabled.ini
+C:\Intel\RORG Password Generator\publish\win-x64\CharsMap\normal.ini
+C:\Intel\RORG Password Generator\publish\win-x64\CharsMap\number.ini
+C:\Intel\RORG Password Generator\publish\win-x64\CharsMap\special.ini
+C:\Intel\RORG Password Generator\publish\win-x64\DefaultConfigs\defaultApiKey.ini
+C:\Intel\RORG Password Generator\publish\win-x64\DefaultConfigs\defaultDescription.ini
+C:\Intel\RORG Password Generator\publish\win-x64\DefaultConfigs\defaultSettingPath.ini
+C:\Intel\RORG Password Generator\publish\win-x64\DefaultConfigs\defaultSettings.ini
+C:\Intel\RORG Password Generator\publish\win-x64\DOC\DOC-About_app.txt
+C:\Intel\RORG Password Generator\publish\win-x64\DOC\DOC-Paths_and_files.txt
+C:\Intel\RORG Password Generator\publish\win-x64\DOC\DOC-What_is_API.txt
+C:\Intel\RORG Password Generator\publish\win-x64\Pasword_generator.dll
+C:\Intel\RORG Password Generator\publish\win-x64\Pasword_generator.deps.json
+C:\Intel\RORG Password Generator\publish\win-x64\Pasword_generator.runtimeconfig.json
+C:\Intel\RORG Password Generator\publish\win-x64\Pasword_generator.pdb

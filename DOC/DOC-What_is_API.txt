@@ -1,0 +1,18 @@
+This application uses the random.org service for truly random passwords.
+An API key enables the application to communicate with the Random.org service.
+
+The default key used in the application might not be sufficient for all users.
+We recommend that each user creates their own API key.
+The free plan (Developer) is sufficient for all operations in the application.
+
+Create an API key at: https://api.random.org/pricing
+
+Quick steps:
+1. Go to https://api.random.org
+2. Sign up / Log in
+3. Go to „My API Keys“
+4. Click „Create new API key“ (Developer / Free plan)
+5. Copy the key
+6. In the app → Settings → API key → paste and save
+
+Thank you!

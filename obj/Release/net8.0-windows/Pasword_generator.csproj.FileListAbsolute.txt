@@ -1,0 +1,57 @@
+V:\Pasword_generator\bin\Release\net8.0-windows\Pasword_generator.exe
+V:\Pasword_generator\bin\Release\net8.0-windows\Pasword_generator.deps.json
+V:\Pasword_generator\bin\Release\net8.0-windows\Pasword_generator.runtimeconfig.json
+V:\Pasword_generator\bin\Release\net8.0-windows\Pasword_generator.dll
+V:\Pasword_generator\bin\Release\net8.0-windows\Pasword_generator.pdb
+V:\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.Form1.resources
+V:\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.csproj.GenerateResource.cache
+V:\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.GeneratedMSBuildEditorConfig.editorconfig
+V:\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.AssemblyInfoInputs.cache
+V:\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.AssemblyInfo.cs
+V:\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.csproj.CoreCompileInputs.cache
+V:\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.dll
+V:\Pasword_generator\obj\Release\net8.0-windows\refint\Pasword_generator.dll
+V:\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.pdb
+V:\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.genruntimeconfig.cache
+V:\Pasword_generator\obj\Release\net8.0-windows\ref\Pasword_generator.dll
+D:\Programy\Projekty\Windows\Pasword_generator\bin\Release\net8.0-windows\Pasword_generator.exe
+D:\Programy\Projekty\Windows\Pasword_generator\bin\Release\net8.0-windows\Pasword_generator.deps.json
+D:\Programy\Projekty\Windows\Pasword_generator\bin\Release\net8.0-windows\Pasword_generator.runtimeconfig.json
+D:\Programy\Projekty\Windows\Pasword_generator\bin\Release\net8.0-windows\Pasword_generator.dll
+D:\Programy\Projekty\Windows\Pasword_generator\bin\Release\net8.0-windows\Pasword_generator.pdb
+D:\Programy\Projekty\Windows\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.Form1.resources
+D:\Programy\Projekty\Windows\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.csproj.GenerateResource.cache
+D:\Programy\Projekty\Windows\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programy\Projekty\Windows\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.AssemblyInfoInputs.cache
+D:\Programy\Projekty\Windows\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.AssemblyInfo.cs
+D:\Programy\Projekty\Windows\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.csproj.CoreCompileInputs.cache
+D:\Programy\Projekty\Windows\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.dll
+D:\Programy\Projekty\Windows\Pasword_generator\obj\Release\net8.0-windows\refint\Pasword_generator.dll
+D:\Programy\Projekty\Windows\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.pdb
+D:\Programy\Projekty\Windows\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.genruntimeconfig.cache
+D:\Programy\Projekty\Windows\Pasword_generator\obj\Release\net8.0-windows\ref\Pasword_generator.dll
+D:\Programy\Projekty\Windows\Pasword_generator\obj\Release\net8.0-windows\Pasword_generator.Form2.resources
+C:\Intel\RORG Password Generator\bin\Release\net8.0-windows\defaultApiKey.ini
+C:\Intel\RORG Password Generator\bin\Release\net8.0-windows\defaultDescription.ini
+C:\Intel\RORG Password Generator\bin\Release\net8.0-windows\defaultSettingPath.ini
+C:\Intel\RORG Password Generator\bin\Release\net8.0-windows\defaultSettings.ini
+C:\Intel\RORG Password Generator\bin\Release\net8.0-windows\DOC\DOC-About_app.txt
+C:\Intel\RORG Password Generator\bin\Release\net8.0-windows\DOC\DOC-Paths_and_files.txt
+C:\Intel\RORG Password Generator\bin\Release\net8.0-windows\DOC\DOC-What_is_API.txt
+C:\Intel\RORG Password Generator\bin\Release\net8.0-windows\Pasword_generator.exe
+C:\Intel\RORG Password Generator\bin\Release\net8.0-windows\Pasword_generator.deps.json
+C:\Intel\RORG Password Generator\bin\Release\net8.0-windows\Pasword_generator.runtimeconfig.json
+C:\Intel\RORG Password Generator\bin\Release\net8.0-windows\Pasword_generator.dll
+C:\Intel\RORG Password Generator\bin\Release\net8.0-windows\Pasword_generator.pdb
+C:\Intel\RORG Password Generator\obj\Release\net8.0-windows\Password_generator.Form1.resources
+C:\Intel\RORG Password Generator\obj\Release\net8.0-windows\Password_generator.Form2.resources
+C:\Intel\RORG Password Generator\obj\Release\net8.0-windows\Pasword_generator.csproj.GenerateResource.cache
+C:\Intel\RORG Password Generator\obj\Release\net8.0-windows\Pasword_generator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Intel\RORG Password Generator\obj\Release\net8.0-windows\Pasword_generator.AssemblyInfoInputs.cache
+C:\Intel\RORG Password Generator\obj\Release\net8.0-windows\Pasword_generator.AssemblyInfo.cs
+C:\Intel\RORG Password Generator\obj\Release\net8.0-windows\Pasword_generator.csproj.CoreCompileInputs.cache
+C:\Intel\RORG Password Generator\obj\Release\net8.0-windows\Pasword_generator.dll
+C:\Intel\RORG Password Generator\obj\Release\net8.0-windows\refint\Pasword_generator.dll
+C:\Intel\RORG Password Generator\obj\Release\net8.0-windows\Pasword_generator.pdb
+C:\Intel\RORG Password Generator\obj\Release\net8.0-windows\Pasword_generator.genruntimeconfig.cache
+C:\Intel\RORG Password Generator\obj\Release\net8.0-windows\ref\Pasword_generator.dll

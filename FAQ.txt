@@ -1,0 +1,41 @@
+Frequently asked questions (FAQs):
+
+1. Can UTF-16 be utilized in any way?  
+Yes, most modern services support entering passwords using the UTF-16 character set.
+
+2. I see weird squares/rectangles in my password, what are they?  
+These are undefined characters that have a number assigned but lack an associated symbol or meaning. Symbols are periodicly aded, in time this undefined charactes get a unique symbol.
+
+3. Why does it take longer to generate passwords using Random.org compared to locally generated ones?  
+This is related to the limitations of the provider's default free API plan and the maximum number of requests per second. It's especially notable when generating passwords with all possible characters.
+
+4. Do I need to create my own API key?  
+No, but I recommend doing so if you frequently generate passwords and want to avoid being limited by other users sharing the same key.
+
+5. Are the passwords meaningful/memorable?  
+No, and that’s actually the safest approach. Utilizing nearly true randomness provides such a high level of security.
+
+6. The application won’t start, what’s wrong?  
+The app requires .NET version 8 and at least Windows 7 or higher. I cannot guarantee its functionality on Linux distributions running via Wine.
+OR
+Some of configuration files is damaged or mising
+
+7. How do I install the application?  
+No installation is needed. Simply extract the folder PR-RORG.zip and use it. The application keeps its settings (including the API key) in its folder located within Program Files. Please change the API key on your own, because this public can be blocked or zneužit.
+
+8. Where is documentation<
+This app is small and I dont create much of non user documentation, files with description setings and function is located in same directory as .exe file in folder DOC.
+
+9. Where is distributed this program?
+This app is only distributed on https://sourceforge.net/projects/pasword-generator-rorg/
+I am not planing git repozitory, because size of project is small and vynaložit prostredky na git je nákladné a nevrátí se.
+
+10. Is planing any further developing and functionality updates?
+No, this is simple app - minimálne byla ze zaèátku, nekdo možná by ocenil vlastní profily generování ve vìtším poètu než 1. Pokud chcete nejaké konkretní rozšíøení prosím napište na jan_pisa@email.cz. Mám nìkolik nápadù kam aplikaci posunout ale nechci zboøit jednoduchost použití. Jde prece pouze o generátor náhodných èísel. 
+Jedním z plánù bylo vytvoøit pøeklady alespon do techto jazykù: CZ -  (my native language), RU, DE, FR, (Chinese), ES
+
+11. Are this program free?
+Yes, this program is free to use, share and modyfy - note if you want modyfy program write please on the jan_pisa@email.cz for beter pochopení a spolupráci ale není to poviné. Jediné co zakazuji je si privlastnovat mou práci a tím porušovat autorský zákon, není chyba pøiznat že nìco takového již existuje a vy jste si to pouze upravily podle sebe.
+
+
+Creator: John Nevzer Avrung

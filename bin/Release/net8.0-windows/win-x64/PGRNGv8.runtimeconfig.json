@@ -1,0 +1,25 @@
+{
+  "runtimeOptions": {
+    "tfm": "net8.0",
+    "frameworks": [
+      {
+        "name": "Microsoft.NETCore.App",
+        "version": "8.0.0"
+      },
+      {
+        "name": "Microsoft.WindowsDesktop.App",
+        "version": "8.0.0"
+      }
+    ],
+    "configProperties": {
+      "System.Runtime.CETCompat": true,
+      "System.Runtime.Intrinsics.X86.Avx512F.IsSupported": false,
+      "System.Runtime.Intrinsics.X86.Avx512BW.IsSupported": false,
+      "System.Runtime.Intrinsics.X86.Avx512CD.IsSupported": false,
+      "System.Runtime.Intrinsics.X86.Avx512DQ.IsSupported": false,
+      "System.Runtime.Intrinsics.X86.Avx512Vbmi.IsSupported": false,
+      "System.Reflection.Metadata.MetadataUpdater.IsSupported": false,
+      "CSWINRT_USE_WINDOWS_UI_XAML_PROJECTIONS": false
+    }
+  }
+}

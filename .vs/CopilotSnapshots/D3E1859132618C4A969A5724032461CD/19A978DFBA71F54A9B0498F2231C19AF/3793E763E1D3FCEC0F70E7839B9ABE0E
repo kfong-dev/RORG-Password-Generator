@@ -1,0 +1,93 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Pasword_generator
+{
+
+    internal class SaveSettings
+    {
+        public string key { get; set; }
+        public bool requestMode { get; set; } // false - default, true - custom
+        public int requestDelay { get; set; } // 100ms
+        public int lenght { get; set; } // 16 chars
+        public int mode { get; set; } //0 - numbers, 1 - only  normal chars, 2 - with special chars, 3 - enabled chars, 4 - all table
+        public bool usedApi { get; set; }// false local generation, true - online by random.org
+        public bool clearPreviusResult { get; set; }
+        public bool copyToClibboard { get; set; }
+
+        public SaveSettings(string key, bool requestMode, int requestDelay, int lenght, int mode, bool usedApi, bool clearPreviusResult, bool copyToClibboard)
+        {
+            this.key = key;
+            this.lenght = lenght;
+            this.mode = mode;
+            this.usedApi = usedApi;
+            this.clearPreviusResult = clearPreviusResult;
+            this.copyToClibboard = copyToClibboard;
+        }
+
+        public SaveSettings() { }
+
+        public override string ToString() { return $"{key}\n{requestMode}\n{requestDelay}\n{lenght}\n{mode}\n{usedApi}\n{clearPreviusResult}\n{copyToClibboard}"; }
+
+        public string WriteData()
+        {
+            try
+            {
+                string SettingsFilePath = File.ReadAllText(@"DefaultConfigs\\defaultSettingPath.ini", Encoding.UTF8);
+                string Description = File.ReadAllText(@"DefaultConfigs\\defaultDescription.ini", Encoding.UTF8);
+                if (File.Exists(SettingsFilePath))
+                {
+                    File.WriteAllText(SettingsFilePath, this.ToString() + Description, Encoding.UTF8);
+                    return "Current configuration is succesfuly saved.";
+                }
+                else
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(SettingsFilePath));
+                    File.WriteAllText(SettingsFilePath, this.ToString() + Description, Encoding.UTF8);
+                    return "Now you use test API key, it is not guranted any requests! It maybe will work but it is default for all app instancies. Please create your own key. Instructions in: Settings -> What is API? -> ...";
+                }
+            }
+            catch (Exception ex) { return ex.Message + "Unable to write into the diractory, please check your system."; }
+        }
+
+        public string LoadData(bool defaultPath)
+        {
+            try
+            {
+                // Read the settings file and split by line
+
+                string inifile = (!defaultPath) ? File.ReadAllText(File.ReadAllText("DefaultConfigs\\defaultSettingPath.ini", Encoding.UTF8), Encoding.UTF8) : File.ReadAllText("DefaultConfigs\\defaultSettings.ini", Encoding.UTF8);
+                string[] ini = inifile.Split("\n");
+                key = (defaultPath) ? File.ReadAllText("DefaultConfigs\\defaultApiKey.ini", Encoding.UTF8) : ini[0];
+                requestMode = bool.Parse(ini[1]);  // Nastaví hodnotu pro 'requestMode'
+                requestDelay = int.Parse(ini[2]);  // Nastaví hodnotu pro 'requestDelay'
+                lenght = int.Parse(ini[3]);  // Nastaví hodnotu pro 'lenght'
+                mode = int.Parse(ini[4]);  // Nastaví hodnotu pro 'mode'
+                usedApi = bool.Parse(ini[5]);  // Nastaví hodnotu pro 'usedApi'
+                clearPreviusResult = bool.Parse(ini[6]);  // Nastaví hodnotu pro 'clearPreviusResult'
+                copyToClibboard = bool.Parse(ini[7]);  // Nastaví hodnotu pro 'copyToClibboard'
+
+                return "Settings succesfyly loaded.";
+            }
+            catch (Exception ex)
+            {
+                SaveSettings DefaultSettings = new SaveSettings();
+                DefaultSettings.LoadData(true);
+
+                key = DefaultSettings.key;
+                requestMode = DefaultSettings.requestMode;
+                requestDelay = DefaultSettings.requestDelay;
+                lenght = DefaultSettings.lenght;
+                mode = DefaultSettings.mode;
+                usedApi = DefaultSettings.usedApi;
+                clearPreviusResult = DefaultSettings.clearPreviusResult;
+                copyToClibboard = DefaultSettings.copyToClibboard;
+
+                return ex.Message + "\nNow it is used a default configuration. Configuration file is not overided and is located in\n" + File.ReadAllText("DefaultConfigs\\defaultSettingPath.ini", Encoding.UTF8);
+            }
+        }
+    }
+}

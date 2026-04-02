@@ -1,0 +1,12 @@
+C:\Intel\RORG Password Generator\bin\PGRNGv8.exe
+C:\Intel\RORG Password Generator\bin\LICENSE.txt
+C:\Intel\RORG Password Generator\bin\defaultApiKey.ini
+C:\Intel\RORG Password Generator\bin\defaultDescription.ini
+C:\Intel\RORG Password Generator\bin\defaultSettingPath.ini
+C:\Intel\RORG Password Generator\bin\defaultSettings.ini
+C:\Intel\RORG Password Generator\bin\DOC\DOC-About_app.txt
+C:\Intel\RORG Password Generator\bin\DOC\DOC-Paths_and_files.txt
+C:\Intel\RORG Password Generator\bin\DOC\DOC-What_is_API.txt
+C:\Intel\RORG Password Generator\bin\PGRNGv8.dll
+C:\Intel\RORG Password Generator\bin\PGRNGv8.deps.json
+C:\Intel\RORG Password Generator\bin\PGRNGv8.runtimeconfig.json

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Pasword_generator</id>
+    <version>1.0.0</version>
+    <authors>Pasword_generator</authors>
+    <description>Package Description</description>
+    <repository type="git" />
+    <dependencies>
+      <group targetFramework="net8.0-windows7.0" />
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net8.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WindowsForms" />
+      </group>
+    </frameworkReferences>
+    <contentFiles>
+      <files include="any/net8.0-windows7.0/iconPG_up_an.ico" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/CharsMap/enabled.ini" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/CharsMap/normal.ini" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/CharsMap/number.ini" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/CharsMap/special.ini" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/DefaultConfigs/defaultApiKey.ini" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/DefaultConfigs/defaultDescription.ini" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/DefaultConfigs/defaultSettingPath.ini" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/DefaultConfigs/defaultSettings.ini" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/DOC/DOC-About_app.txt" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/DOC/DOC-Paths_and_files.txt" buildAction="Content" />
+      <files include="any/net8.0-windows7.0/DOC/DOC-What_is_API.txt" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="C:\Intel\RORG Password Generator\bin\Debug\net8.0-windows\Pasword_generator.runtimeconfig.json" target="lib\net8.0-windows7.0\Pasword_generator.runtimeconfig.json" />
+    <file src="C:\Intel\RORG Password Generator\bin\Debug\net8.0-windows\Pasword_generator.dll" target="lib\net8.0-windows7.0\Pasword_generator.dll" />
+    <file src="C:\Intel\RORG Password Generator\iconPG_up_an.ico" target="content\iconPG_up_an.ico" />
+    <file src="C:\Intel\RORG Password Generator\iconPG_up_an.ico" target="contentFiles\any\net8.0-windows7.0\iconPG_up_an.ico" />
+    <file src="C:\Intel\RORG Password Generator\CharsMap\enabled.ini" target="content\CharsMap\enabled.ini" />
+    <file src="C:\Intel\RORG Password Generator\CharsMap\enabled.ini" target="contentFiles\any\net8.0-windows7.0\CharsMap\enabled.ini" />
+    <file src="C:\Intel\RORG Password Generator\CharsMap\normal.ini" target="content\CharsMap\normal.ini" />
+    <file src="C:\Intel\RORG Password Generator\CharsMap\normal.ini" target="contentFiles\any\net8.0-windows7.0\CharsMap\normal.ini" />
+    <file src="C:\Intel\RORG Password Generator\CharsMap\number.ini" target="content\CharsMap\number.ini" />
+    <file src="C:\Intel\RORG Password Generator\CharsMap\number.ini" target="contentFiles\any\net8.0-windows7.0\CharsMap\number.ini" />
+    <file src="C:\Intel\RORG Password Generator\CharsMap\special.ini" target="content\CharsMap\special.ini" />
+    <file src="C:\Intel\RORG Password Generator\CharsMap\special.ini" target="contentFiles\any\net8.0-windows7.0\CharsMap\special.ini" />
+    <file src="C:\Intel\RORG Password Generator\DefaultConfigs\defaultApiKey.ini" target="content\DefaultConfigs\defaultApiKey.ini" />
+    <file src="C:\Intel\RORG Password Generator\DefaultConfigs\defaultApiKey.ini" target="contentFiles\any\net8.0-windows7.0\DefaultConfigs\defaultApiKey.ini" />
+    <file src="C:\Intel\RORG Password Generator\DefaultConfigs\defaultDescription.ini" target="content\DefaultConfigs\defaultDescription.ini" />
+    <file src="C:\Intel\RORG Password Generator\DefaultConfigs\defaultDescription.ini" target="contentFiles\any\net8.0-windows7.0\DefaultConfigs\defaultDescription.ini" />
+    <file src="C:\Intel\RORG Password Generator\DefaultConfigs\defaultSettingPath.ini" target="content\DefaultConfigs\defaultSettingPath.ini" />
+    <file src="C:\Intel\RORG Password Generator\DefaultConfigs\defaultSettingPath.ini" target="contentFiles\any\net8.0-windows7.0\DefaultConfigs\defaultSettingPath.ini" />
+    <file src="C:\Intel\RORG Password Generator\DefaultConfigs\defaultSettings.ini" target="content\DefaultConfigs\defaultSettings.ini" />
+    <file src="C:\Intel\RORG Password Generator\DefaultConfigs\defaultSettings.ini" target="contentFiles\any\net8.0-windows7.0\DefaultConfigs\defaultSettings.ini" />
+    <file src="C:\Intel\RORG Password Generator\DOC\DOC-About_app.txt" target="content\DOC\DOC-About_app.txt" />
+    <file src="C:\Intel\RORG Password Generator\DOC\DOC-About_app.txt" target="contentFiles\any\net8.0-windows7.0\DOC\DOC-About_app.txt" />
+    <file src="C:\Intel\RORG Password Generator\DOC\DOC-Paths_and_files.txt" target="content\DOC\DOC-Paths_and_files.txt" />
+    <file src="C:\Intel\RORG Password Generator\DOC\DOC-Paths_and_files.txt" target="contentFiles\any\net8.0-windows7.0\DOC\DOC-Paths_and_files.txt" />
+    <file src="C:\Intel\RORG Password Generator\DOC\DOC-What_is_API.txt" target="content\DOC\DOC-What_is_API.txt" />
+    <file src="C:\Intel\RORG Password Generator\DOC\DOC-What_is_API.txt" target="contentFiles\any\net8.0-windows7.0\DOC\DOC-What_is_API.txt" />
+  </files>
+</package>

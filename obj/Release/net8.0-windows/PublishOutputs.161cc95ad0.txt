@@ -1,0 +1,5 @@
+V:\Pasword_generator\bin\Release\net8.0-windows\app.publish\Pasword_generator.exe
+V:\Pasword_generator\bin\Release\net8.0-windows\app.publish\Pasword_generator.dll
+V:\Pasword_generator\bin\Release\net8.0-windows\app.publish\Pasword_generator.deps.json
+V:\Pasword_generator\bin\Release\net8.0-windows\app.publish\Pasword_generator.runtimeconfig.json
+V:\Pasword_generator\bin\Release\net8.0-windows\app.publish\Pasword_generator.pdb
