@@ -20,6 +20,9 @@ namespace Password_generator
         private static readonly HttpClient client = new HttpClient();
         private readonly System.Windows.Forms.Timer _csprngRefreshTimer = new System.Windows.Forms.Timer { Interval = 60_000 };
         private readonly System.Windows.Forms.Timer _clockTimer = new System.Windows.Forms.Timer { Interval = 1_000 };
+// Development API key — free tier, licensed for development and testing only.
+// Not for commercial use. Replace with a licensed key for production deployment.
+// See: https://api.random.org/pricing
         private const string RANDOM_ORG_API_KEY = "cff4f1e6-9e8d-4446-a4b2-ae57ac5550da";
 
         // ── Integrated character sets (item 12) ──────────────────────────────
