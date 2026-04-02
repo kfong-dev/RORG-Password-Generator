@@ -6,3 +6,7 @@ The hardcoded random.org API key (`cff4f1e6-9e8d-4446-a4b2-ae57ac5550da`) is a
 free public development key licensed for testing only — it is intentionally 
 included in source and is not a secret. Production deployments should use a 
 separately licensed key obtained from https://api.random.org/pricing
+
+Original project and credit goes to 
+John Nevzer Avrung (https://sourceforge.net/u/john-nevzer/profile/)
+https://sourceforge.net/projects/pasword-generator-rorg/
